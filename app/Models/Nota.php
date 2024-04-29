@@ -15,4 +15,9 @@ class Nota extends Model
         'name',
     ];
 
+    // public function arpegio()
+    // {
+    //     return $this->belongsTo(\App\Models\Arpegio::class);
+    // }
+
 }
