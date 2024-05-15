@@ -7,7 +7,7 @@ use \App\Models\Nota;
 
 class NotasController extends Controller
 {
-    function getNotas (){
+    function getNotes (){
         $notas = Nota::all();
 
         // foreach($notas as $nota){
@@ -16,7 +16,7 @@ class NotasController extends Controller
         return $notas;
     }
     
-    function getNotaById ($id){
+    function getNoteById ($id){
         $nota = Nota::findOrFail($id);
         return $nota;
     }
