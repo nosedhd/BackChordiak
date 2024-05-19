@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Nota extends Model
+class Note extends Model
 {
     use HasFactory;
 
     protected $table = 'notes';
 
-    protected $fillable = [
-        'name',
-    ];
+    
 
     // public function arpegio()
     // {

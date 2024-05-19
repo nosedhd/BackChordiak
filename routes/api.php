@@ -2,8 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\NotasController;
-
+use App\Http\Controllers\NotesController;
+use App\Http\Controllers\LanguagesController;
+use App\Http\Controllers\ScalesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,11 @@ use App\Http\Controllers\NotasController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('    ', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});
-// Route::get('/notas', NotaController::class);
-// Route::get('/notas', 'NotasController@getNotas');
-Route::get('/notas', [NotasController::class, 'getNotas']);
+}); 
+
+Route::get('/notas', [NotesController::class, 'getNotes']);
+Route::get('/idiomas', [LanguagesController::class, 'getLanguages'])->name('idiomas');
+Route::get('/scales', [ScalesController::class, 'getScales']);
+Route::get('/getScaleNotes/{tonic}/{intervals}', [NotesController::class, 'getScalesNotes']);
