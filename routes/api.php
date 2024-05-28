@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NotesController;
 use App\Http\Controllers\LanguagesController;
-use App\Http\Controllers\ScalesController;
+use App\Http\Controllers\GlobalScalesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,5 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/notas', [NotesController::class, 'getNotes']);
 Route::get('/idiomas', [LanguagesController::class, 'getLanguages'])->name('idiomas');
-Route::get('/scales', [ScalesController::class, 'getScales']);
+Route::get('/scales', [GlobalScalesController::class, 'getScales']);
 Route::get('/getScaleNotes/{tonic}/{intervals}', [NotesController::class, 'getScalesNotes']);
+
+Route::post('/global-scales', 'GlobalScalesController@handleChordIndex');
