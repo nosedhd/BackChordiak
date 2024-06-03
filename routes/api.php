@@ -25,5 +25,4 @@ Route::get('/notas', [NotesController::class, 'getNotes']);
 Route::get('/idiomas', [LanguagesController::class, 'getLanguages'])->name('idiomas');
 Route::get('/scales', [GlobalScalesController::class, 'getScales']);
 Route::get('/getScaleNotes/{tonic}/{intervals}', [NotesController::class, 'getScalesNotes']);
-
 Route::post('/global-scales', 'GlobalScalesController@handleChordIndex');

@@ -13,9 +13,14 @@ class GlobalScale extends Model
         return $scales;
     }
 
-    function getNameScaleById($id){
+    function getScaleById($id){
         $scale = GlobalScale::findOrFail($id);
         return $scale;
+    }
+    function getIntervalsScaleById($id){
+        $scale = getScaleById($id);
+        $interval = $scale -> intervals;
+        return $interval;
     }
     
 }

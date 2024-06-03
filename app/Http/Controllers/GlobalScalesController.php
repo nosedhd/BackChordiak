@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Models\GlobalScale;
+use \App\Models\Note;
 
 class GlobalScalesController extends Controller
 {
@@ -13,27 +14,37 @@ class GlobalScalesController extends Controller
         return $scale;
     }
 
-    function getNameScaleById($id){
+    function getScaleById($id){
         $scales = new GlobalScale();
-        $scale = $scales -> getNameScaleById($id);
-        return $scales;
+        $scale = $scales -> getScaleById($id);
+        return $scale;
+    }
+    
+    function getIntervalsScaleById($id){
+        $scales = new GlobalScale();
+        $scale = $scales -> getIntervalsScaleById($id);
+        return $scale;
     }
     public function handleChordIndex(Request $request){
         $notesChord=[];
+        // Traemos el index de la nota desde el front
         $chordIndex = $request->input('chordIndex');
-        $escaleId = $request->input('escaleId');
-        $scale = getNameScaleById(escaleId);
-        $secondNote = 0;
-        $thirdNote = 0;
+        // Traemos el index de la escala desde el front
+        $scale = getIntervalsScaleById($request->input('scaleId'));
+        // Creamos los objetos Note
+        $firstNote = new Note();
+        $secondNote = new Note();
+        $thirdNote = new Note();
 
-        $chordModIndex = $chordIndex % 12;
-        if ($chordModIndex == 0){
-            // $secondNote= ;
+        $firstNote -> setPosition($chordIndex);
+        $secondNote -> setPosition($secondNote -> evaluateModNote($chordIndex + intval($scale[2])));
+        $thirdNote -> setPosition($thirdNote -> evaluateModNote($chordIndex + intval($scale[4])));
 
-
-        }
+        array_push($notesChord, $firstNote);
+        array_push($notesChord, $secondNote);
+        array_push($notesChord, $thirdNote);
 
         
-        return response()->json(['chordIndex' => $chordIndex]);
+        return response()->json(['notesChord' => $notesChord]);
     }
 }
